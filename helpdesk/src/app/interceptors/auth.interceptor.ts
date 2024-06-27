@@ -26,4 +26,4 @@ export const AuthInterceptorProvider = [
     useClass: AuthInterceptor,
     multi: true
   }
-] 
+];
