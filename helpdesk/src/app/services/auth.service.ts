@@ -10,8 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   jwtService: JwtHelperService = new JwtHelperService();
-
-
+  
   constructor(private http: HttpClient) { }
 
   autheticate(creds: Credenciais){
@@ -31,4 +30,9 @@ export class AuthService {
     }
     return false;
   }
-}
+
+  logout(){
+   
+     localStorage.clear();
+    }
+}   
