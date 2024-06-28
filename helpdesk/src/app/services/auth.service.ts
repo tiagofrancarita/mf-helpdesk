@@ -14,13 +14,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   autheticate(creds: Credenciais){
-    return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, 
+    return this.http.post(`${API_CONFIG.baseUrl}`, creds, 
       {observe:'response',
       responseType: 'text'})
+      
   }
 
   sucessFullLogin(authToken: string){
     localStorage.setItem('token', authToken);
+    console.log(authToken);
   }
 
   isAuthenticated(){
