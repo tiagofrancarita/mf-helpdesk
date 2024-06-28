@@ -1,3 +1,5 @@
 export const API_CONFIG = {
-    baseUrl: 'https://helpdesk-production-4b39.up.railway.app/api-helpdesk'
+    baseUrl: 'http://localhost:8080/api-helpdesk/login',
+    listarTecnicos: 'http://localhost:8080/api-helpdesk/v1/tecnicos/listarTecnicos',
     }
+    
