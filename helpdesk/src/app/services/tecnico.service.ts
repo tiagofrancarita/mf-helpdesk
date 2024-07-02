@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from '../config/api.config';
 import { Observable } from 'rxjs';
 import { Tecnico } from '../models/tecnico';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,19 @@ import { Tecnico } from '../models/tecnico';
 export class TecnicoService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
 
   ) { }
 
   findAll(): Observable<Tecnico[]> {
 
-    return this.http.get<Tecnico[]>(`${API_CONFIG.listarTecnicos}`);
+    const token = this.authService.jwtService.tokenGetter();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
+    return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/v1/tecnicos/listarTecnicos`);
   }
 
 }
