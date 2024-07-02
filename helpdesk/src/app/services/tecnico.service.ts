@@ -17,13 +17,12 @@ export class TecnicoService {
   ) { }
 
   findAll(): Observable<Tecnico[]> {
-
-    const token = this.authService.jwtService.tokenGetter();
+    const token = this.authService.getToken(); // Obtém o token do AuthService
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/v1/tecnicos/listarTecnicos`);
+    return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/v1/tecnicos/listarTecnicos`, { headers });
   }
 
 }
