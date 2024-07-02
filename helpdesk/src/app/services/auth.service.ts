@@ -10,31 +10,34 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   jwtService: JwtHelperService = new JwtHelperService();
-  
+
   constructor(private http: HttpClient) { }
 
-  autheticate(creds: Credenciais){
-    return this.http.post(`${API_CONFIG.baseUrl}`, creds, 
-      {observe:'response',
-      responseType: 'text'})
-      
+  authenticate(creds: Credenciais) {
+    
+    console.log(creds.email)
+    console.log(creds.senha)
+    console.log(`${API_CONFIG.baseUrl}/login`)
+
+    return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, {
+      observe: 'response',
+      responseType: 'text'
+    })
   }
 
-  sucessFullLogin(authToken: string){
+  successfulLogin(authToken: string) {
     localStorage.setItem('token', authToken);
-    console.log(authToken);
   }
 
-  isAuthenticated(){
-    let token = localStorage.getItem('token');
-    if(token != null){
-      return !this.jwtService.isTokenExpired(token);
+  isAuthenticated() {
+    let token = localStorage.getItem('token')
+    if(token != null) {
+      return !this.jwtService.isTokenExpired(token)
     }
-    return false;
+    return false
   }
 
-  logout(){
-   
-     localStorage.clear();
-    }
-}   
+  logout() {
+    localStorage.clear();
+  }
+}
