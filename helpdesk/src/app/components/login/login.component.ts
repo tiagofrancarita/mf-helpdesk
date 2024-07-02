@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
       const authHeader = resposta.headers.get('Authorization');
       if (authHeader) {
         this.service.successfulLogin(authHeader.substring(7));
+        this.toast.success('Login efetuado com sucesso!', 'Login');
         this.router.navigate(['']);
-        console.log(authHeader);
       } else {
-        console.error('Authorization header is null');
-        this.toast.error('Erro ao autenticar. Cabeçalho de autorização não encontrado.');
+        console.error('Erro ao autenticar. Cabeçalho de autorização não encontrado.');
+        this.toast.error('Erro ao autenticar. Cabeçalho de autorização não encontrado.', 'Login');
       }
     }, () => {
       this.toast.error('Usuário e/ou senha inválidos');
@@ -45,5 +45,4 @@ export class LoginComponent implements OnInit {
   validaCampos(): boolean {
     return this.email.valid && this.senha.valid
   }
-
 }

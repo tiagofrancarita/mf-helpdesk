@@ -35,6 +35,7 @@ import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecn
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 
 
 
@@ -46,7 +47,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     HeaderComponent,
     TecnicoListComponent,
     LoginComponent,
-    TecnicoCreateComponent
+    TecnicoCreateComponent,
+    TecnicoUpdateComponent
   ],
   imports: [
     MatDatepickerModule,
