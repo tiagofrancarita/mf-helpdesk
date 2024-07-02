@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Para trabalhar com formulários no Angular 12
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -32,6 +31,11 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { TecnicoCreateComponent } from './components/tecnico/tecnico-create/tecnico-create.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 
 
 @NgModule({
@@ -41,9 +45,12 @@ import { LoginComponent } from './components/login/login.component';
     HomeComponent,
     HeaderComponent,
     TecnicoListComponent,
-    LoginComponent
+    LoginComponent,
+    TecnicoCreateComponent
   ],
   imports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -68,11 +75,9 @@ import { LoginComponent } from './components/login/login.component';
     MatListModule,
     MatCardModule,
     ToastrModule.forRoot({timeOut: 10000, closeButton: true, progressBar: true}),
-
+    NgxMaskDirective,
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [provideNgxMask({ /* opções de cfg */ })],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
