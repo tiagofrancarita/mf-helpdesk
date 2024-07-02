@@ -6,5 +6,4 @@ export interface Tecnico {
     senha:       string;
     perfis:      string[];
     dataCriacao: any;
-    
-    }
+}

@@ -12,7 +12,6 @@ import { Tecnico } from '../../../models/tecnico';
 })
 export class TecnicoUpdateComponent implements OnInit {
 
-
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -28,7 +27,6 @@ export class TecnicoUpdateComponent implements OnInit {
   email: FormControl = new FormControl(null, [Validators.minLength(3), Validators.email]);
   senha: FormControl = new FormControl(null, [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]);
   dataCriacao: FormControl = new FormControl(null, Validators.required);
-
 
   constructor(
     private service: TecnicoService,
@@ -47,9 +45,6 @@ export class TecnicoUpdateComponent implements OnInit {
     this.tecnico = resposta;
     })
   }
-
-
-  
 
   update(): void {
     this.tecnico.perfis = this.tecnico.perfis.map(perfil => this.convertPerfilToCode(perfil));
@@ -87,5 +82,4 @@ convertPerfilToCode(perfil: string): string {
   validaCampos(): boolean {
     return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
   }
-
 }

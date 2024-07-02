@@ -6,8 +6,6 @@ import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-tecnico-create',
   templateUrl: './tecnico-create.component.html',
@@ -31,7 +29,6 @@ export class TecnicoCreateComponent implements OnInit {
   email: FormControl = new FormControl(null, [Validators.minLength(3), Validators.email]);
   senha: FormControl = new FormControl(null, [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]);
   dataCriacao: FormControl = new FormControl(null, Validators.required);
-
 
   constructor(
     private service: TecnicoService,
@@ -70,5 +67,4 @@ export class TecnicoCreateComponent implements OnInit {
   validaCampos(): boolean {
     return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid && this.dataCriacao.valid;
   }
-
 }

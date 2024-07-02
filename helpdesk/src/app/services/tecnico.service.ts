@@ -47,5 +47,4 @@ export class TecnicoService {
     });
     return this.http.put<Tecnico>(`${API_CONFIG.baseUrl}/v1/tecnicos/atualizarTecnico/${tecnico.id}`, tecnico, { headers });
   } 
-
 }
