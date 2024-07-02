@@ -28,11 +28,18 @@ export class LoginComponent implements OnInit {
 
   logar() {
     this.service.authenticate(this.creds).subscribe(resposta => {
-      this.service.successfulLogin(resposta.headers.get('Authorization').substring(7));
-      this.router.navigate([''])
+      const authHeader = resposta.headers.get('Authorization');
+      if (authHeader) {
+        this.service.successfulLogin(authHeader.substring(7));
+        this.router.navigate(['']);
+        console.log(authHeader);
+      } else {
+        console.error('Authorization header is null');
+        this.toast.error('Erro ao autenticar. Cabeçalho de autorização não encontrado.');
+      }
     }, () => {
       this.toast.error('Usuário e/ou senha inválidos');
-    })
+    });
   }
 
   validaCampos(): boolean {

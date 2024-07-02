@@ -14,11 +14,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   authenticate(creds: Credenciais) {
-    
-    console.log(creds.email)
-    console.log(creds.senha)
-    console.log(`${API_CONFIG.baseUrl}/login`)
-
     return this.http.post(`${API_CONFIG.baseUrl}/login`, creds, {
       observe: 'response',
       responseType: 'text'
@@ -35,6 +30,11 @@ export class AuthService {
       return !this.jwtService.isTokenExpired(token)
     }
     return false
+  }
+
+   // Método para obter o token armazenado
+    getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   logout() {
