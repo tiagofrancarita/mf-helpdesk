@@ -21,8 +21,11 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "angular-text-mask": "^0.0.1",
+    "ngx-mask": "^16.4.1",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
+    "text-mask-core": "^5.1.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
