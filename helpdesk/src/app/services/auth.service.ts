@@ -31,8 +31,7 @@ export class AuthService {
     }
     return false
   }
-
-   // Método para obter o token armazenado
+  
     getToken(): string | null {
     return localStorage.getItem('token');
   }

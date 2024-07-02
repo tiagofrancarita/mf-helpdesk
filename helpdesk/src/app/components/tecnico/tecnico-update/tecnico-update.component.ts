@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { TecnicoService } from '../../../services/tecnico.service';
-import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+import { Tecnico } from '../../../models/tecnico';
 
 @Component({
-  selector: 'app-tecnico-create',
-  templateUrl: './tecnico-create.component.html',
-  styleUrls: ['./tecnico-create.component.css'],
-
+  selector: 'app-tecnico-update',
+  templateUrl: './tecnico-update.component.html',
+  styleUrl: './tecnico-update.component.css'
 })
-export class TecnicoCreateComponent implements OnInit {
+export class TecnicoUpdateComponent implements OnInit {
 
   tecnico: Tecnico = {
     id: '',
@@ -33,27 +31,44 @@ export class TecnicoCreateComponent implements OnInit {
   constructor(
     private service: TecnicoService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tecnico.id = this.route.snapshot.paramMap.get('id');
+    this.findById();
+  }
 
+  findById(): void {
+    this.service.findById(this.tecnico.id).subscribe(resposta => {
+    this.tecnico = resposta;
+    })
+  }
 
-  create(): void {
-
+  update(): void {
+    this.tecnico.perfis = this.tecnico.perfis.map(perfil => this.convertPerfilToCode(perfil));
     this.tecnico.dataCriacao = new Date().toISOString();
-
-    this.service.create(this.tecnico).subscribe(() => {
-      this.toast.success('Técnico cadastrado com sucesso!', 'Cadastro de técnicos');
+    this.service.update(this.tecnico).subscribe(() => {
+      this.toast.success('Técnico atualizado com sucesso!', 'Atualização de técnicos');
       this.router.navigate(['tecnicos']);
     }, ex => {
         if(ex.error.erros){
           ex.error.erros.forEach(element => {
-            this.toast.error(element.message, 'Cadastro de técnicos'); 
+            this.toast.error(element.message, 'Atualização de técnicos'); 
 
         });
     }
   })
+}
+
+convertPerfilToCode(perfil: string): string {
+  const perfilMap = {
+      'ADMIN': '1',
+      'CLIENTE': '2',
+      'TECNICO': '3'
+  };
+  return perfilMap[perfil];
 }
 
   addPerfil(perfil: any): void {
@@ -65,6 +80,6 @@ export class TecnicoCreateComponent implements OnInit {
   }
 
   validaCampos(): boolean {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid && this.dataCriacao.valid;
+    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
   }
 }
