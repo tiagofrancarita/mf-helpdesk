@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tecnico-create',
-  //standalone: true,
   templateUrl: './tecnico-create.component.html',
   styleUrls: ['./tecnico-create.component.css'],
 
@@ -63,10 +62,8 @@ export class TecnicoCreateComponent implements OnInit {
   addPerfil(perfil: any): void {
     if (this.tecnico.perfis.includes(perfil)) {
       this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-      console.log(this.tecnico.perfis);
     }else{
       this.tecnico.perfis.push(perfil);
-      console.log(this.tecnico.perfis); 
     }
   }
 
