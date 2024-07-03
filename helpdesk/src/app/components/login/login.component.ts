@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   email = new FormControl(null, Validators.email);
   senha = new FormControl(null, Validators.minLength(3));
 
+  hide = true;
+
   constructor(
     private toast: ToastrService,
     private service: AuthService,
@@ -44,5 +46,9 @@ export class LoginComponent implements OnInit {
 
   validaCampos(): boolean {
     return this.email.valid && this.senha.valid
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 }
