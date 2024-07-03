@@ -11,7 +11,4 @@ export interface Chamado {
     dataFechamento?: string;
     nomeCliente: string;
     nomeTecnico: string;
-
-
-
 }
