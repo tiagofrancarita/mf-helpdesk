@@ -17,14 +17,14 @@ export class TecnicoService {
   ) { }
 
   findById(id: any): Observable<Tecnico> {
-    const token = this.authService.getToken(); // Obtém o token do AuthService
+    const token = this.authService.getToken(); 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });    return this.http.get<Tecnico>(`${API_CONFIG.baseUrl}/v1/tecnicos/buscarTecnicoPorId/${id}`, { headers });
   }
 
   findAll(): Observable<Tecnico[]> {
-    const token = this.authService.getToken(); // Obtém o token do AuthService
+    const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -33,7 +33,7 @@ export class TecnicoService {
   }
 
   create(tecnico: Tecnico): Observable<Tecnico> {
-    const token = this.authService.getToken(); // Obtém o token do AuthService
+    const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -41,10 +41,18 @@ export class TecnicoService {
   }
 
   update(tecnico: Tecnico): Observable<Tecnico> {
-    const token = this.authService.getToken(); // Obtém o token do AuthService
+    const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
     return this.http.put<Tecnico>(`${API_CONFIG.baseUrl}/v1/tecnicos/atualizarTecnico/${tecnico.id}`, tecnico, { headers });
-  } 
+  }
+  
+  delete(id: any): Observable<Tecnico> {
+        const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<Tecnico>(`${API_CONFIG.baseUrl}/v1/tecnicos/deletarTecnicoPorId/${id}`, { headers });
+  }
 }
