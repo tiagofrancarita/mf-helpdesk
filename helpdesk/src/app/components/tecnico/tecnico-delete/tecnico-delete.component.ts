@@ -8,7 +8,8 @@ import { TecnicoService } from '../../../services/tecnico.service';
 @Component({
   selector: 'app-tecnico-delete',
   templateUrl: './tecnico-delete.component.html',
-  styleUrl: './tecnico-delete.component.css'
+  styleUrls: ['./tecnico-delete.component.css'],
+  //
 })
 export class TecnicoDeleteComponent implements OnInit {
 
@@ -53,12 +54,4 @@ export class TecnicoDeleteComponent implements OnInit {
   })
 }
 
-convertPerfilToCode(perfil: string): string {
-  const perfilMap = {
-      'ADMIN': '1',
-      'CLIENTE': '2',
-      'TECNICO': '3'
-  };
-  return perfilMap[perfil];
-}
 }

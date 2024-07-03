@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { TecnicoService } from '../../../services/tecnico.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Cliente } from '../../../models/cliente';
 import { FormControl, Validators } from '@angular/forms';
-import { Tecnico } from '../../../models/tecnico';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ClienteService } from '../../../services/cliente.service';
 
 @Component({
-  selector: 'app-tecnico-update',
-  templateUrl: './tecnico-update.component.html',
-  styleUrls: ['./tecnico-update.component.css'],})
-  
-export class TecnicoUpdateComponent implements OnInit {
+  selector: 'app-cliente-update',
+  templateUrl: './cliente-update.component.html',
+  styleUrls: ['./cliente-update.component.css'],})
+export class ClienteUpdateComponent {
 
-  tecnico: Tecnico = {
+  cliente: Cliente = {
     id: '',
     nome: '',
     cpf: '',
@@ -31,28 +30,28 @@ export class TecnicoUpdateComponent implements OnInit {
   hide = true;
 
   constructor(
-    private service: TecnicoService,
+    private service: ClienteService,
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.tecnico.id = this.route.snapshot.paramMap.get('id');
+    this.cliente.id = this.route.snapshot.paramMap.get('id');
     this.findById();
   }
 
   findById(): void {
-    this.service.findById(this.tecnico.id).subscribe(resposta => {
-    this.tecnico = resposta;
+    this.service.findById(this.cliente.id).subscribe(resposta => {
+    this.cliente = resposta;
     })
   }
 
   update(): void {
-    this.tecnico.perfis = this.tecnico.perfis.map(perfil => this.convertPerfilToCode(perfil));
-    this.service.update(this.tecnico).subscribe(() => {
-      this.toast.success('Técnico atualizado com sucesso', 'Atualização');
-      this.router.navigate(['tecnicos'])
+    this.cliente.perfis = this.cliente.perfis.map(perfil => this.convertPerfilToCode(perfil));
+    this.service.update(this.cliente).subscribe(() => {
+      this.toast.success('Cliente atualizado com sucesso', 'Atualização');
+      this.router.navigate(['clientes'])
     }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {
@@ -74,15 +73,15 @@ convertPerfilToCode(perfil: string): string {
 }
 
   addPerfil(perfil: any): void {
-    if (this.tecnico.perfis.includes(perfil)) {
-      this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
+    if (this.cliente.perfis.includes(perfil)) {
+      this.cliente.perfis.splice(this.cliente.perfis.indexOf(perfil), 1);
     }else{
-      this.tecnico.perfis.push(perfil);
+      this.cliente.perfis.push(perfil);
     }
   }
 
   validaCamposAtualizar(): boolean {
-    return this.nome.valid && this.cpf.valid && this.email.valid && this.senha.valid;
+    return this.nome.valid && this.cpf.valid && this.email.valid;
   }
 
   togglePasswordVisibility(): void {
