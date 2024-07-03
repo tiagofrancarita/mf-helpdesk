@@ -47,20 +47,19 @@ export class TecnicoUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.tecnico.perfis = this.tecnico.perfis.map(perfil => this.convertPerfilToCode(perfil));
-    this.tecnico.dataCriacao = new Date().toISOString();
-    this.service.update(this.tecnico).subscribe(() => {
-      this.toast.success('Técnico atualizado com sucesso!', 'Atualização de técnicos');
-      this.router.navigate(['tecnicos']);
+    this.service.delete(this.tecnico.id).subscribe(() => {
+      this.toast.success('Técnico deletado com sucesso', 'Delete');
+      this.router.navigate(['tecnicos'])
     }, ex => {
-        if(ex.error.erros){
-          ex.error.erros.forEach(element => {
-            this.toast.error(element.message, 'Atualização de técnicos'); 
-
+      if(ex.error.errors) {
+        ex.error.errors.forEach(element => {
+          this.toast.error(element.message);
         });
-    }
-  })
-}
+      } else {
+        this.toast.error(ex.error.message);
+      }
+    })
+  }
 
 convertPerfilToCode(perfil: string): string {
   const perfilMap = {
