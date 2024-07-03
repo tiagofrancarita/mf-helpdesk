@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { TecnicoService } from '../../../services/tecnico.service';
 import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +9,6 @@ import { Router } from '@angular/router';
   selector: 'app-tecnico-create',
   templateUrl: './tecnico-create.component.html',
   styleUrls: ['./tecnico-create.component.css'],
-
 })
 export class TecnicoCreateComponent implements OnInit {
 
@@ -20,8 +18,8 @@ export class TecnicoCreateComponent implements OnInit {
     cpf: '',
     email: '',
     senha: '',
-    perfis : [],
-    dataCriacao:''
+    perfis: [],
+    dataCriacao: ''
   };
 
   nome: FormControl = new FormControl(null, Validators.minLength(3));
@@ -38,30 +36,26 @@ export class TecnicoCreateComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void { }
 
   create(): void {
-
     this.tecnico.dataCriacao = new Date().toISOString();
-
     this.service.create(this.tecnico).subscribe(() => {
       this.toast.success('Técnico cadastrado com sucesso!', 'Cadastro de técnicos');
       this.router.navigate(['tecnicos']);
     }, ex => {
-        if(ex.error.erros){
-          ex.error.erros.forEach(element => {
-            this.toast.error(element.message, 'Cadastro de técnicos'); 
-
+      if (ex.error.erros) {
+        ex.error.erros.forEach(element => {
+          this.toast.error(element.message, 'Cadastro de técnicos');
         });
-    }
-  })
-}
+      }
+    });
+  }
 
   addPerfil(perfil: any): void {
     if (this.tecnico.perfis.includes(perfil)) {
       this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-    }else{
+    } else {
       this.tecnico.perfis.push(perfil);
     }
   }
@@ -73,5 +67,4 @@ export class TecnicoCreateComponent implements OnInit {
   togglePasswordVisibility(): void {
     this.hide = !this.hide;
   }
-  
 }
