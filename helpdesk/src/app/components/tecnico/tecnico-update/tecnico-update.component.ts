@@ -8,8 +8,8 @@ import { Tecnico } from '../../../models/tecnico';
 @Component({
   selector: 'app-tecnico-update',
   templateUrl: './tecnico-update.component.html',
-  styleUrl: './tecnico-update.component.css'
-})
+  styleUrls: ['./tecnico-update.component.css'],})
+  
 export class TecnicoUpdateComponent implements OnInit {
 
   tecnico: Tecnico = {
@@ -49,8 +49,9 @@ export class TecnicoUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.service.delete(this.tecnico.id).subscribe(() => {
-      this.toast.success('Técnico deletado com sucesso', 'Delete');
+    this.tecnico.perfis = this.tecnico.perfis.map(perfil => this.convertPerfilToCode(perfil));
+    this.service.update(this.tecnico).subscribe(() => {
+      this.toast.success('Técnico atualizado com sucesso', 'Atualização');
       this.router.navigate(['tecnicos'])
     }, ex => {
       if(ex.error.errors) {
