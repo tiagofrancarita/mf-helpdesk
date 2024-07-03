@@ -36,8 +36,7 @@ export class TecnicoDeleteComponent implements OnInit {
 
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe(resposta => {
-    this.tecnico = resposta;
-    })
+    this.tecnico = resposta;})
   }
 
   delete(): void {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { TecnicoService } from '../../../services/tecnico.service';
 import { Tecnico } from '../../../models/tecnico';
 import { ToastrService } from 'ngx-toastr';
