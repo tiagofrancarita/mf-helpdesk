@@ -7,13 +7,13 @@ import { ClienteService } from '../../../services/cliente.service';
 @Component({
   selector: 'app-cliente-list',
   templateUrl: './cliente-list.component.html',
-  styleUrl: './cliente-list.component.css'
+  styleUrls: ['./cliente-list.component.css'],
 })
 export class ClienteListComponent {
 
   ELEMENT_DATA: Cliente[] = []
 
-  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'acoes'];
+  displayedColumns: string[] = ['id', 'tituloChamado', 'descricaoChamado', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
