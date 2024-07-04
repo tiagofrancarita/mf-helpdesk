@@ -63,10 +63,9 @@ chamado: Chamado = {
   }
 
   update(): void {
-    // Ajuste para enviar os perfis como números
-    this.chamado.tecnico.perfis = this.chamado.tecnico.perfis.map(perfil => perfil.codigo); // Enviando códigos dos perfis
-    this.chamado.cliente.perfis = this.chamado.cliente.perfis.map(perfil => perfil.codigo); // Enviando códigos dos perfis
-  
+
+    this.chamado.tecnico.perfis = this.chamado.tecnico.perfis.map(perfil => perfil.codigo);
+    this.chamado.cliente.perfis = this.chamado.cliente.perfis.map(perfil => perfil.codigo);
     this.chamadoService.update(this.chamado).subscribe(resposta => {
       this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
       this.router.navigate(['chamados']);
@@ -110,6 +109,5 @@ chamado: Chamado = {
     } else {
       return 'ALTA'
     }
-  }
-  
+  } 
 }
