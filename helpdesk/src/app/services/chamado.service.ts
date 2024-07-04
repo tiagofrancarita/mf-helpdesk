@@ -17,7 +17,7 @@ export class ChamadoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/${id}`, { headers });
+    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/buscarChamado/${id}`, { headers });
   }
 
   findAll(): Observable<Chamado[]> {
