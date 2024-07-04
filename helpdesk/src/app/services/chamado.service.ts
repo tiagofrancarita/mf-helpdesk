@@ -10,16 +10,14 @@ import { AuthService } from './auth.service';
 })
 export class ChamadoService {
 
-  
-  constructor(private http: HttpClient,
-    private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   findById(id: any): Observable<Chamado> {
     const token = this.authService.getToken(); 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/buscarChamado/${id}`, { headers });
+    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/${id}`, { headers });
   }
 
   findAll(): Observable<Chamado[]> {
@@ -43,6 +41,6 @@ export class ChamadoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/atualizaChamadoParaExecucao/${chamado.id}`, chamado, { headers });
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/${chamado.id}`, chamado, { headers });
   }
 }

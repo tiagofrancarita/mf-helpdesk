@@ -45,7 +45,6 @@ export class ChamadoListComponent implements OnInit {
 
   findAll() {
     this.service.findAll().subscribe(resposta => {
-      console.log('Resposta da API:', resposta); // Adiciona log para verificar a resposta da API
       this.ELEMENT_DATA = resposta;
       this.dataSource = new MatTableDataSource<Chamado>(resposta);
       this.dataSource.paginator = this.paginator;
@@ -58,12 +57,10 @@ export class ChamadoListComponent implements OnInit {
   }
 
   retornaStatus(statusEnum: string): string {
-    console.log('Status Enum:', statusEnum); // Adiciona log para verificar o valor do enum
     return this.statusMap[statusEnum] || 'STATUS DESCONHECIDO';
   }
 
   retornaPrioridade(prioridade: string): string {
-    console.log('Prioridade Enum:', prioridade); // Adiciona log para verificar o valor do enum
     return this.prioridadeMap[prioridade] || 'PRIORIDADE DESCONHECIDA';
   }
 
