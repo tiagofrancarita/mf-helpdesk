@@ -67,7 +67,7 @@ export class ChamadoListComponent implements OnInit {
   orderByStatus(statusEnum: string): void {
     let list: Chamado[] = [];
     this.ELEMENT_DATA.forEach(element => {
-      if (element.statusEnum == statusEnum)
+      if (element.status == statusEnum)
         list.push(element);
     });
     this.FILTERED_DATA = list;
