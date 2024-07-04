@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
 import { Chamado } from '../models/chamado';
 import { AuthService } from './auth.service';
@@ -17,7 +17,9 @@ export class ChamadoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/buscarChamado/${id}`, { headers });
+    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/buscarChamado/${id}`, { headers })
+      .pipe(map(response => response['body']) // Adicione esta linha para mapear o body
+      );
   }
 
   findAll(): Observable<Chamado[]> {
@@ -41,6 +43,6 @@ export class ChamadoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/${chamado.id}`, chamado, { headers });
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/v1/chamados/atualizaInfoChamado/${chamado.id}`, chamado, { headers });
   }
 }

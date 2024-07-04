@@ -16,38 +16,39 @@ import { TecnicoService } from '../../../services/tecnico.service';
 })
 export class ChamadoUpdateComponent implements OnInit {
 
-  chamado: Chamado = {
-
-    prioridade: 'ALTA', 
-    statusEnum: 'ABERTO',
-    titulo: '',
+chamado: Chamado = {
+    prioridade:  '',
+    status:      '',
+    titulo:      '',
     observacoes: '',
-    tecnico: { id: 0, nome: '', cpf: '', email: '', senha: '', perfis: [], dataCriacao: '' },
-    cliente: { id: 0, nome: '', cpf: '', email: '', senha: '', perfis: [], dataCriacao: '' },
+    tecnico:     '',
+    cliente:     '',
+    nomeCliente: '',
+    nomeTecnico: '',
     descricaoChamado: ''
-  };
+  }
 
   clientes: Cliente[] = []
   tecnicos: Tecnico[] = []
 
   prioridade: FormControl = new FormControl(null, [Validators.required]);
-  status:     FormControl = new FormControl(null, [Validators.required]);
-  titulo:     FormControl = new FormControl(null, [Validators.required]);
-  observacoes:FormControl = new FormControl(null, [Validators.required]);
-  tecnico:    FormControl = new FormControl(null, [Validators.required]);
-  cliente:    FormControl = new FormControl(null, [Validators.required]);
+  status: FormControl = new FormControl(null, [Validators.required]);
+  titulo: FormControl = new FormControl(null, [Validators.required]);
+  observacoes: FormControl = new FormControl(null, [Validators.required]);
+  tecnico: FormControl = new FormControl(null, [Validators.required]);
+  cliente: FormControl = new FormControl(null, [Validators.required]);
 
   constructor(
     private chamadoService: ChamadoService,
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
-    private toastService:    ToastrService,
+    private toastService: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.chamado.id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
+    this.chamado.id = this.route.snapshot.paramMap.get('id');
     this.findById();
     this.findAllClientes();
     this.findAllTecnicos();
@@ -62,12 +63,16 @@ export class ChamadoUpdateComponent implements OnInit {
   }
 
   update(): void {
+    // Ajuste para enviar os perfis como números
+    this.chamado.tecnico.perfis = this.chamado.tecnico.perfis.map(perfil => perfil.codigo); // Enviando códigos dos perfis
+    this.chamado.cliente.perfis = this.chamado.cliente.perfis.map(perfil => perfil.codigo); // Enviando códigos dos perfis
+  
     this.chamadoService.update(this.chamado).subscribe(resposta => {
       this.toastService.success('Chamado atualizado com sucesso', 'Atualizar chamado');
       this.router.navigate(['chamados']);
     }, ex => {
       this.toastService.error(ex.error.error);
-    })
+    });
   }
 
   findAllClientes(): void {
@@ -106,4 +111,5 @@ export class ChamadoUpdateComponent implements OnInit {
       return 'ALTA'
     }
   }
+  
 }
