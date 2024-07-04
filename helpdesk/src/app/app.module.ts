@@ -45,6 +45,7 @@ import { ChamadoListComponent } from './components/chamado/chamado-list/chamado-
 import { ChamadoCreateComponent } from './components/chamado/chamado-create/chamado-create.component';
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
+import { GerarRelatorioComponent } from './components/relatorio/gerar-relatorio/gerar-relatorio.component';
 
 
 
@@ -66,7 +67,8 @@ import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-
     ChamadoListComponent,
     ChamadoCreateComponent,
     ChamadoUpdateComponent,
-    ChamadoReadComponent
+    ChamadoReadComponent,
+    GerarRelatorioComponent
   ],
   imports: [
     MatDatepickerModule,
