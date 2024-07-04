@@ -1,14 +1,15 @@
+import { Cliente } from "./cliente";
+import { Tecnico } from "./tecnico";
+
 export interface Chamado {
-    id?: string;
-    tituloChamado: string;
+    id?: number;
+    dataAbertura?: Date;
+    dataFechamento?: Date;
+    titulo: string;
     descricaoChamado: string;
-    prioridadeEnum: string;
-    statusEnum: string;
-    observacao: string;
-    cliente: any;
-    tecnico: any;
-    dataAbertura?: string;
-    dataFechamento?: string;
-    nomeCliente: string;
-    nomeTecnico: string;
+    prioridade: 'ALTA' | 'MEDIA' | 'BAIXA';
+    statusEnum: 'ABERTO' | 'EM_ANDAMENTO' | 'ENCERRADO';
+    observacoes: string;
+    tecnico: Tecnico;
+    cliente: Cliente;
 }
