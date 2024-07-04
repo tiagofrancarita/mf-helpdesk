@@ -17,17 +17,16 @@ import { TecnicoService } from '../../../services/tecnico.service';
 export class ChamadoCreateComponent implements OnInit {
 
   chamado: Chamado = {
-    prioridade: 'ALTA', // Inicialize com um valor padrão válido
-    statusEnum: 'ABERTO', // Inicialize com um valor padrão válido
-    titulo: '',
-    observacoes: '',
-    tecnico: { id: 0, nome: '', cpf: '', email: '', senha: '', perfis: [], dataCriacao: '' },
-    cliente: { id: 0, nome: '', cpf: '', email: '', senha: '', perfis: [], dataCriacao: '' },
-    descricaoChamado: ''
-  };
-
-  nomeCliente: string = '';
-  nomeTecnico: string = '';
+      prioridade:  '',
+      status:      '',
+      titulo:      '',
+      observacoes: '',
+      tecnico:     '',
+      cliente:     '',
+      nomeCliente: '',
+      nomeTecnico: '',
+      descricaoChamado: ''
+    }
 
   clientes: Cliente[] = [];
   tecnicos: Tecnico[] = [];
