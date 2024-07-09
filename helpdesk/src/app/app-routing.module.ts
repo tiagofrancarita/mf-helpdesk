@@ -17,6 +17,7 @@ import { ChamadoCreateComponent } from './components/chamado/chamado-create/cham
 import { ChamadoUpdateComponent } from './components/chamado/chamado-update/chamado-update.component';
 import { ChamadoReadComponent } from './components/chamado/chamado-read/chamado-read.component';
 import { GerarRelatorioComponent } from './components/relatorio/gerar-relatorio/gerar-relatorio.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent}
@@ -41,6 +42,7 @@ const routes: Routes = [
       ,{path: 'chamados/read/:id', component: ChamadoReadComponent}
 
       ,{path: 'relatorios', component: GerarRelatorioComponent}
+      ,{ path: 'scheduled', component: ScheduleComponent },
 
     ]
   }

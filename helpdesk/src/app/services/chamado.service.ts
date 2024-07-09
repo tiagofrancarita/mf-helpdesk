@@ -12,6 +12,14 @@ export class ChamadoService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
+  getCountByStatus(): Observable<any> {
+    const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/v1/chamados/countByStatus`, { headers });
+  }
+
   findById(id: any): Observable<Chamado> {
     const token = this.authService.getToken(); 
     const headers = new HttpHeaders({
